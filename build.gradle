@@ -35,38 +35,28 @@ task("addVersion") {
 
 jar.dependsOn(addVersion)
 
-import org.gradle.internal.os.OperatingSystem
 import org.gradle.internal.jvm.Jvm
-
-String osName = OperatingSystem.current().getName()
-String osVersion = OperatingSystem.current().getVersion()
-//println "*** $osName $osVersion was detected."
 
 dependencies {
     implementation "com.google.code.gson:gson:2.8.6"
     implementation "org.scilab.forge:jlatexmath:1.0.7"
-    if (OperatingSystem.current().isWindows()) {
+    if (project.hasProperty("windows")) {
         implementation "org.openjfx:javafx-base:${javafx.version}:win"
         implementation "org.openjfx:javafx-swing:${javafx.version}:win"
         implementation "org.openjfx:javafx-graphics:${javafx.version}:win"
         implementation "org.openjfx:javafx-controls:${javafx.version}:win"
-    } else if (OperatingSystem.current().isLinux()) {
+    } else {
+        if (project.hasProperty("linux")) {
         implementation "org.openjfx:javafx-base:${javafx.version}:linux"
         implementation "org.openjfx:javafx-swing:${javafx.version}:linux"
         implementation "org.openjfx:javafx-graphics:${javafx.version}:linux"
         implementation "org.openjfx:javafx-controls:${javafx.version}:linux"
-    } else if (OperatingSystem.current().isUnix()) {
-        implementation "org.openjfx:javafx-base:${javafx.version}:unix"
-        implementation "org.openjfx:javafx-swing:${javafx.version}:unix"
-        implementation "org.openjfx:javafx-graphics:${javafx.version}:unix"
-        implementation "org.openjfx:javafx-controls:${javafx.version}:unix"
-    } else if (OperatingSystem.current().isMacOsX()) {
+        } else {
         implementation "org.openjfx:javafx-base:${javafx.version}:mac"
         implementation "org.openjfx:javafx-swing:${javafx.version}:mac"
         implementation "org.openjfx:javafx-graphics:${javafx.version}:mac"
         implementation "org.openjfx:javafx-controls:${javafx.version}:mac"
-    } else {
-        throw new  GradleException("Unnown OS: ${osName}:${osVersion}")
+        }
     }
 }
 
@@ -74,15 +64,11 @@ runtime {
     imageZip = file("${buildDir}/../releases/Image2LaTeX-${version}.zip")
     addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
     addModules("java.base", "java.datatransfer", "java.desktop", "java.logging", "java.net.http", "java.prefs", "java.sql", "java.transaction.xa", "jdk.unsupported", "jdk.unsupported.desktop", "java.xml")
-    if (OperatingSystem.current().isLinux()) {
+    if (project.hasProperty("linux")) {
         //targetPlatform("linux", "jdk/linux-jdk")
         targetPlatform("linux", Jvm.current().getJavaHome().getAbsolutePath())
-    } else if (OperatingSystem.current().isMacOsX()) {
-        targetPlatform("macos", "jdk/osx-jdk.jdk/Contents/Home")
-    } else if (OperatingSystem.current().isWindows()) {
-        targetPlatform("windows", "jdk/windows-jdk")
     } else {
-        throw new  GradleException("Unknown OS: ${osName}:${osName}")
+        targetPlatform("macos", "jdk/osx-jdk.jdk/Contents/Home")
     }
 }
 

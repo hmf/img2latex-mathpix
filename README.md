@@ -125,12 +125,13 @@ replace the line:
     targetPlatform("linux", "jdk/linux-jdk")
 with:
 
+    import org.gradle.internal.jvm.Jvm
     targetPlatform("linux", Jvm.current().getJavaHome().getAbsolutePath())
 
 and now we can execute the resulting image directly so:
 
 ```
-cd ~/IdeaProjects/img2latex-mathpix/build/image/bin
+cd ~/IdeaProjects/img2latex-mathpix/build/image/Image2LaTeX-linux/bin/Image2LaTeX
 ./Image2LaTeX
 ```
 
@@ -141,7 +142,33 @@ Note that irrespective the corrections above, the following also works:
 ```
 
 For more information on the above issues see [issue 74](https://github.com/blaisewang/img2latex-mathpix/issues/74).
+
+Summary:
+
+From the project root we can (1) start all over, (2) execute the app directly, 
+(2) generate an archive, (3) generate an image and then (c) execute that image.  
        
+```
+./gradlew clean
+./gradlew -Plinux run
+./gradlew -Plinux runtimeZip
+./gradlew -Plinux installDist
+./build/image/Image2LaTeX-linux/bin/Image2LaTeX
+```
+
+In to run the Gradle script successfully we need set the parameter `-Plinux` in
+the. Instructions to this are in the [Working with Gradle Tasks](https://www.jetbrains.com/help/idea/work-with-gradle-tasks.html)
+help item. One must right click on the task to launch the dialog box that 
+allows this. Unfortunately this does [not seem to be working](https://youtrack.jetbrains.com/issue/IDEA-202704)
+and it also does not seem to be possible to [set this globally])(https://github.com/b1f6c1c4/gradle-run-with-arguments).
+To use the IDE we can circumvent the flag by changing the build script lines:
+
+    if (project.hasProperty("linux")) {
+  
+with   
+
+    if (OperatingSystem.current().isLinux()) {
+
 
 # Image2LaTeX
 
