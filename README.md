@@ -1,3 +1,5 @@
+https://github.com/blaisewang/img2latex-mathpix/issues/74
+
 # Image2LaTeX
 
 English | [中文](https://github.com/blaisewang/img2latex-mathpix/blob/master/README-ZH.md#readme)
