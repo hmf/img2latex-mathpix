@@ -25,8 +25,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -79,6 +81,8 @@ public class BackGridPane extends GridPane {
             FRONT_GRID_PANE.getFourthPressCopyTextField()
     );
 
+    private static final Integer keyPressCount = 0;
+
     /**
      * UI.BackGridPane Initialisation.
      */
@@ -117,9 +121,13 @@ public class BackGridPane extends GridPane {
         add(renderedBorderPane, 0, 3, 2, 1);
 
         FRONT_GRID_PANE.setOnKeyReleased(event -> {
+            Date now = new Date();
+            String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(now);
 
             // space key to update image
             if (event.getCode() == KeyCode.BACK_SPACE) {
+                String logMsg = String.format("%s KeyCode.BACK_SPACE", timeStamp);
+                System.out.println(logMsg);
 
                 // prevent multiple image updates in a short time
                 if (Instant.now().getEpochSecond() - lastUpdateCompletionTimestamp < 1) {
@@ -136,10 +144,15 @@ public class BackGridPane extends GridPane {
                 lastUpdateCompletionTimestamp = Instant.now().getEpochSecond();
 
             }
-
-            // enter key to send the OCR request
-            if (event.getCode() == KeyCode.ENTER) {
-                requestHandler();
+            else if (event.getCode() == KeyCode.ENTER) {
+                // BUG 1: enter key detected multiple times. Wasting calls
+                // enter key to send the OCR request
+                String logMsg = String.format("%s KeyCode.ENTER", timeStamp);
+                System.out.println(logMsg);
+                // TODO: reactivate requestHandler();
+            } else {
+                String logMsg = String.format("%s KeyCode = %s", timeStamp, event);
+                System.out.println(logMsg);
             }
 
         });

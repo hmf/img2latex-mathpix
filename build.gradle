@@ -45,18 +45,21 @@ dependencies {
         implementation "org.openjfx:javafx-swing:${javafx.version}:win"
         implementation "org.openjfx:javafx-graphics:${javafx.version}:win"
         implementation "org.openjfx:javafx-controls:${javafx.version}:win"
-    } else {
-        if (project.hasProperty("linux")) {
+    } else if (project.hasProperty("linux")) {
         implementation "org.openjfx:javafx-base:${javafx.version}:linux"
         implementation "org.openjfx:javafx-swing:${javafx.version}:linux"
         implementation "org.openjfx:javafx-graphics:${javafx.version}:linux"
         implementation "org.openjfx:javafx-controls:${javafx.version}:linux"
-        } else {
+    } else if (project.hasProperty("macos")) {
         implementation "org.openjfx:javafx-base:${javafx.version}:mac"
         implementation "org.openjfx:javafx-swing:${javafx.version}:mac"
         implementation "org.openjfx:javafx-graphics:${javafx.version}:mac"
         implementation "org.openjfx:javafx-controls:${javafx.version}:mac"
-        }
+    } else {
+        implementation "org.openjfx:javafx-base:${javafx.version}:linux"
+        implementation "org.openjfx:javafx-swing:${javafx.version}:linux"
+        implementation "org.openjfx:javafx-graphics:${javafx.version}:linux"
+        implementation "org.openjfx:javafx-controls:${javafx.version}:linux"
     }
 }
 
@@ -67,8 +70,11 @@ runtime {
     if (project.hasProperty("linux")) {
         //targetPlatform("linux", "jdk/linux-jdk")
         targetPlatform("linux", Jvm.current().getJavaHome().getAbsolutePath())
-    } else {
+    } else if (project.hasProperty("linux")) {
         targetPlatform("macos", "jdk/osx-jdk.jdk/Contents/Home")
+    } else {
+        //targetPlatform("linux", "jdk/linux-jdk")
+        targetPlatform("linux", Jvm.current().getJavaHome().getAbsolutePath())
     }
 }
 
