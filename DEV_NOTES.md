@@ -205,8 +205,8 @@ Step 4: Push your updates to master. You may need to force the push with “--fo
 
 ## Syncing a fork
 
-[Sync a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork) of a repository to keep it up-to-date with the upstream repository.
-
+[Sync a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork) of a 
+repository to keep it up-to-date with the upstream repository and [configuring a remote for a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork).
 
 1. Open Terminal.
 1. Change the current working directory to your local project.
@@ -247,6 +247,10 @@ without losing your local changes.
         >  README.md                 |    5 +++--
         >  1 file changed, 3 insertions(+), 2 deletions(-)
     ```
+1. This command seems to be missing
+   ```
+   git push master
+   ```
 
 
 
