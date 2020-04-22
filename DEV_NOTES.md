@@ -179,3 +179,74 @@ http://java-buddy.blogspot.com/2016/01/javafx-example-to-capture-screengui.html
 https://openjfx.io/javadoc/12/javafx.graphics/javafx/scene/robot/Robot.html
 https://www.codejava.net/java-se/graphics/how-to-capture-screenshot-programmatically-in-java
 https://blog.ngopal.com.np/2012/09/10/javafx-liveview/
+
+
+# Git Notes
+
+## How to update a forked repo with git rebase
+
+Instructions found [here](https://medium.com/@topspinj/how-to-git-rebase-into-a-forked-repo-c9f05e821c8a):
+
+Step 1: Add the remote (original repo that you forked) and call it “upstream”
+
+    git remote add upstream https://github.com/original-repo/goes-here.git
+
+Step 2: Fetch all branches of remote upstream
+
+    git fetch upstream
+
+Step 3: Rewrite your master with upstream’s master using git rebase.
+
+    git rebase upstream/master
+
+Step 4: Push your updates to master. You may need to force the push with “--force”.
+
+    git push origin master --force
+
+## Syncing a fork
+
+[Sync a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork) of a repository to keep it up-to-date with the upstream repository.
+
+
+1. Open Terminal.
+1. Change the current working directory to your local project.
+1. Fetch the branches and their respective commits from the upstream 
+repository. Commits to master will be stored in a local branch, upstream/master.
+    ```
+        $ git fetch upstream
+        > remote: Counting objects: 75, done.
+        > remote: Compressing objects: 100% (53/53), done.
+        > remote: Total 62 (delta 27), reused 44 (delta 9)
+        > Unpacking objects: 100% (62/62), done.
+        > From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
+        >  * [new branch]      master     -> upstream/master
+    ```
+1. Check out your fork's local master branch.
+    ```
+        $ git checkout master
+        > Switched to branch 'master'
+    ```
+1. Merge the changes from upstream/master into your local master branch. This 
+brings your fork's master branch into sync with the upstream repository, 
+without losing your local changes.
+    ```
+        $ git merge upstream/master
+        > Updating a422352..5fdff0f
+        > Fast-forward
+        >  README                    |    9 -------
+        >  README.md                 |    7 ++++++
+        >  2 files changed, 7 insertions(+), 9 deletions(-)
+        >  delete mode 100644 README
+        >  create mode 100644 README.md
+    ```
+1. If your local branch didn't have any unique commits, Git will instead perform a "fast-forward":
+    ```
+        $ git merge upstream/master
+        > Updating 34e91da..16c56ad
+        > Fast-forward
+        >  README.md                 |    5 +++--
+        >  1 file changed, 3 insertions(+), 2 deletions(-)
+    ```
+
+
+
