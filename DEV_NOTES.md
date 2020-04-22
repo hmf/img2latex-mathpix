@@ -146,18 +146,20 @@ For more information on the above issues see [issue 74](https://github.com/blais
 Summary:
 
 From the project root we can (1) start all over, (2) execute the app directly, 
-(2) generate an archive, (3) generate an image and then (c) execute that image.  
+(2) generate an archive and (3) dist, (3) generate an image and then (c) execute 
+that image.  
        
 ```
 ./gradlew clean
 ./gradlew -Plinux run
 ./gradlew -Plinux runtimeZip
 ./gradlew -Plinux installDist
+./gradlew -Plinux runtime
 ./build/image/Image2LaTeX-linux/bin/Image2LaTeX
 ```
 
-In to run the Gradle script successfully we need set the parameter `-Plinux` in
-the. Instructions to this are in the [Working with Gradle Tasks](https://www.jetbrains.com/help/idea/work-with-gradle-tasks.html)
+In order to run the Gradle script successfully we need set the parameter `-Plinux` in
+the script. Instructions to this are in the [Working with Gradle Tasks](https://www.jetbrains.com/help/idea/work-with-gradle-tasks.html)
 help item. One must right click on the task to launch the dialog box that 
 allows this. Unfortunately this does [not seem to be working](https://youtrack.jetbrains.com/issue/IDEA-202704)
 and it also does not seem to be possible to [set this globally])(https://github.com/b1f6c1c4/gradle-run-with-arguments).
