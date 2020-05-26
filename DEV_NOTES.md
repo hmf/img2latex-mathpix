@@ -131,7 +131,7 @@ with:
 and now we can execute the resulting image directly so:
 
 ```
-cd ~/IdeaProjects/img2latex-mathpix/build/image/Image2LaTeX-linux/bin/Image2LaTeX
+cd ~/IdeaProjects/img2latex-mathpix/build/image/Image2LaTeX-linux/bin
 ./Image2LaTeX
 ```
 
@@ -145,11 +145,13 @@ Taking [screenshots](https://itsfoss.com/take-screenshot-linux/) manually in
 Linux:
 
 * PrtSc – Save a screenshot of the entire screen to the “Pictures” directory.
-* **Shift + PrtSc** – Save a screenshot of a specific region to Pictures.
+* Shift + PrtSc – Save a screenshot of a specific region to Pictures.
 * Alt + PrtSc  – Save a screenshot of the current window to Pictures.
 * Ctrl + PrtSc – Copy the screenshot of the entire screen to the clipboard.
-* Shift + Ctrl + PrtSc – Copy the screenshot of a specific region to the clipboard.
+* **Shift + Ctrl + PrtSc** – Copy the screenshot of a specific region to the clipboard.
 * Ctrl + Alt + PrtSc – Copy the screenshot of the current window to the clipboard.
+
+Use https://viereck.ch/latex-to-svg/ for Latex SVG generation.
 
 
 For more information on the above issues see [issue 74](https://github.com/blaisewang/img2latex-mathpix/issues/74).
