@@ -141,6 +141,17 @@ Note that irrespective the corrections above, the following also works:
 ./gradlew -Plinux run
 ```
 
+Taking [screenshots](https://itsfoss.com/take-screenshot-linux/) manually in 
+Linux:
+
+* PrtSc – Save a screenshot of the entire screen to the “Pictures” directory.
+* **Shift + PrtSc** – Save a screenshot of a specific region to Pictures.
+* Alt + PrtSc  – Save a screenshot of the current window to Pictures.
+* Ctrl + PrtSc – Copy the screenshot of the entire screen to the clipboard.
+* Shift + Ctrl + PrtSc – Copy the screenshot of a specific region to the clipboard.
+* Ctrl + Alt + PrtSc – Copy the screenshot of the current window to the clipboard.
+
+
 For more information on the above issues see [issue 74](https://github.com/blaisewang/img2latex-mathpix/issues/74).
 
 Summary:
